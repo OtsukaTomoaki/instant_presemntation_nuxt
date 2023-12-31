@@ -1,9 +1,10 @@
 <template>
   <footer>
       <div class="insideContainer">
-          <a href="https://www.google.com/"><img src="/images/github.svg" alt="logo"></a>
-          <a href="https://www.google.com/"><img src="/images/twitter.svg" alt="logo"></a>
-          <hr/>
+          <div class="snsContant">
+            <a href="https://github.com/OtsukaTomoaki"><img src="/images/github.svg" alt="logo"></a>
+            <a href="https://twitter.com/big_mound_26"><img src="/images/twitter.svg" alt="logo"></a>
+          </div>
           <NuxtLink to="/contact">Contact</NuxtLink>
           <p>©{{ new Date().getFullYear() }} BigMound26</p>
       </div>
@@ -38,12 +39,18 @@
     margin: 0;
   }
 
-  a {
-    text-decoration: none;
-    color: #000;
+  .snsContant {
+    margin-left: 1rem;
+    display: inline-block;
   }
 
-  img {
+  .snsContant a {
+    text-decoration: none;
+    color: #000;
+    margin-right: 1rem;
+  }
+
+  .snsContant img {
     width: 30px;
     height: 30px;
   }
