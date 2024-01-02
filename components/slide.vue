@@ -1,6 +1,8 @@
 <template>
   <!-- <div ref="pdfViewer"></div> -->
-  <div>hoge</div>
+  <div class="Container">
+    <div id="render_pdf_base"></div>
+  </div>
 </template>
 
 <script setup>
@@ -27,7 +29,8 @@ onMounted(() => {
       canvas.height = viewport.height
       canvas.width = viewport.width
       // CanvasをDOMに追加
-      document.body.appendChild(canvas)
+      const renderSpace = document.getElementById('render_pdf_base')
+      renderSpace.appendChild(canvas)
       // PDFページをCanvasにレンダリング
       const renderContext = {
         canvasContext: context,
@@ -41,3 +44,13 @@ onMounted(() => {
   })
 })
 </script>
+
+<style scoped>
+.Container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
