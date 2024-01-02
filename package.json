@@ -12,7 +12,11 @@
   "devDependencies": {
     "@nuxt/image": "^1.0.0-rc.3",
     "nuxt": "^3.9.0",
+    "vite-plugin-top-level-await": "^1.4.1",
     "vue": "^3.4.0",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^4.0.379"
   }
 }

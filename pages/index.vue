@@ -1,5 +1,6 @@
+
 <template>
   <div>
-foobar
+    <Slide />
   </div>
 </template>
