@@ -1,5 +1,4 @@
 <template>
-  <!-- <div ref="pdfViewer"></div> -->
   <div class="Container">
     <div ref="renderPdfSpace"></div>
   </div>
@@ -8,7 +7,6 @@
 <script setup>
 import * as PDFJS from 'pdfjs-dist'
 import * as pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
-// import { ref } from 'vue'
 
 PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
