@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/image"],
   vite: {
     build: {
-      target: ['esnext', 'es2022', 'edge88','edge89', 'firefox89', "chrome87","chrome88",'chrome89','safari15', 'safari15']
+      target: ['esnext', 'es2022']
     },
     esbuild: {
       target: "es2022"
