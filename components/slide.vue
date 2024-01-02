@@ -1,15 +1,18 @@
 <template>
   <!-- <div ref="pdfViewer"></div> -->
   <div class="Container">
-    <div id="render_pdf_base"></div>
+    <div ref="renderPdfSpace"></div>
   </div>
 </template>
 
 <script setup>
 import * as PDFJS from 'pdfjs-dist'
 import * as pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
+// import { ref } from 'vue'
 
 PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker
+
+const renderPdfSpace = ref(null)
 
 onMounted(() => {
   const loadingTask = PDFJS.getDocument('https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf')
@@ -29,8 +32,7 @@ onMounted(() => {
       canvas.height = viewport.height
       canvas.width = viewport.width
       // CanvasをDOMに追加
-      const renderSpace = document.getElementById('render_pdf_base')
-      renderSpace.appendChild(canvas)
+      renderPdfSpace.value.appendChild(canvas)
       // PDFページをCanvasにレンダリング
       const renderContext = {
         canvasContext: context,
