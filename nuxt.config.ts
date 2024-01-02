@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/image"],
+  buildModules: [
+    "@nuxt/typescript-build"
+  ],
   vite: {
     build: {
       target: ['esnext', 'es2022']
