@@ -4,7 +4,7 @@
       <div class="flexContainer">
         <ul>
           <li>
-            <NuxtLink to="/contact">Contact</NuxtLink>
+            <!-- <NuxtLink to="/contact">Contact</NuxtLink> -->
           </li>
         </ul>
       </div>
