@@ -17,53 +17,53 @@ PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
 const renderPdfSpace = ref(null)
 const currentPage = ref(1)
+const loadingTask = ref(null)
+const numPages = ref(1)
 
-const prevPage = () => {
+const prevPage = async () => {
   if (currentPage.value > 1) {
     currentPage.value--
+    renderPdf(await loadingTask.value.promise)
   }
 }
 
-const nextPage = () => {
-  if (currentPage.value < 5) {
+const nextPage = async () => {
+  if (currentPage.value < numPages.value) {
     currentPage.value++
+    renderPdf(await loadingTask.value.promise)
   }
 }
 
-onMounted(() => {
-  const loadingTask = PDFJS.getDocument('https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf')
-  loadingTask.promise.then((pdf) => {
-    console.log('PDF loaded')
-    // PDFのページ数を取得
-    const numPages = pdf.numPages
-    console.log('numPages', numPages)
-    // 1ページ目を取得
-    pdf.getPage(currentPage.value).then((page) => {
-      console.log('Page loaded')
-      const scale = 1.5
-      const viewport = page.getViewport({ scale: scale })
-      // Canvasを作成してPDFをレンダリング
-      const canvas = document.createElement('canvas')
-      const context = canvas.getContext('2d')
-      canvas.height = viewport.height
-      canvas.width = viewport.width
-      // CanvasをDOMに追加
-      renderPdfSpace.value.appendChild(canvas)
-      // PDFページをCanvasにレンダリング
-      const renderContext = {
-        canvasContext: context,
-        viewport: viewport
-      }
-      page.render(renderContext)
-    })
-  }, (reason) => {
-    // PDFのロードに失敗した場合
-    console.error(reason)
-  })
+onMounted(async () => {
+  loadingTask.value = PDFJS.getDocument('https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf')
+
+  const pdf = await loadingTask.value.promise
+  // PDFのページ数を取得
+  numPages.value = pdf.numPages
+  // 1ページ目を取得
+  renderPdf(pdf)
 })
 
-const renderPdf = () => {
-  console.log('renderPdf')
+const renderPdf = (pdf) => {
+  pdf.getPage(currentPage.value).then((page) => {
+    console.log('Page loaded')
+    const scale = 1.5
+    const viewport = page.getViewport({ scale: scale })
+    // Canvasを作成してPDFをレンダリング
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    canvas.height = viewport.height
+    canvas.width = viewport.width
+    // CanvasをDOMに追加
+    renderPdfSpace.value.innerHTML = ''
+    renderPdfSpace.value.appendChild(canvas)
+    // PDFページをCanvasにレンダリング
+    const renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    }
+    page.render(renderContext)
+  })
 }
 </script>
 
