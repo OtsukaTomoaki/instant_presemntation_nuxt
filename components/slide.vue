@@ -1,9 +1,9 @@
 <template>
-  <div class="Container">
+  <div class="container">
     <div ref="renderPdfSpace"></div>
-    <div class="PrevNextButton">
-      <button class="PrevButton" @click="prevPage">Prev</button>
-      <button class="NextButton" @click="nextPage">Next</button>
+    <div class="prevNextButton">
+      <button class="prevButton" @click="prevPage">Prev</button>
+      <button class="nextButton" @click="nextPage">Next</button>
     </div>
   </div>
 </template>
@@ -68,7 +68,7 @@ const renderPdf = (pdf) => {
 </script>
 
 <style scoped>
-.Container {
+.container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -76,7 +76,7 @@ const renderPdf = (pdf) => {
   align-items: center;
 }
 
-.PrevNextButton {
+.prevNextButton {
   position: absolute;
   bottom: 0;
   left: 0;
