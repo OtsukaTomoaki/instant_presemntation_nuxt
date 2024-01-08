@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div ref="renderPdfSpace"></div>
+    <div class="uploadPdfSpace">
+      <input type="file" accept="application/pdf" @change="uploadPdf">
+    </div>
+    <div class="renderPdfSpace" ref="renderPdfSpace"></div>
     <div class="prevNextButton">
       <button class="prevButton" @click="prevPage">Prev</button>
       <button class="nextButton" @click="nextPage">Next</button>
@@ -31,6 +34,21 @@ const nextPage = async () => {
   if (currentPage.value < numPages.value) {
     currentPage.value++
     renderPdf(await loadingTask.value.promise)
+  }
+}
+
+const uploadPdf = async (e) => {
+  const file = e.target.files[0]
+  const pdfData = await convertFileToBase64(file)
+
+  if (file) {
+    loadingTask.value = PDFJS.getDocument(pdfData)
+    loadingTask.value.promise.then((pdf) => {
+      alert( pdf.numPages)
+      numPages.value = pdf.numPages
+      currentPage.value = 1
+      renderPdf(pdf)
+    })
   }
 }
 
@@ -65,17 +83,43 @@ const renderPdf = (pdf) => {
     page.render(renderContext)
   })
 }
+
+const convertFileToBase64 = (file: File) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+    fileReader.onerror = () => {
+      fileReader.abort()
+      reject(new DOMException('Problem parsing input file.'))
+    }
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    }
+    return fileReader.readAsDataURL(file)
+  })
+}
 </script>
 
 <style scoped>
 .container {
   width: 100%;
   height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.uploadPdfSpace {
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.renderPdfSpace {
+  width: 100%;
+  height: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
 .prevNextButton {
   position: absolute;
   bottom: 0;
