@@ -44,7 +44,6 @@ const uploadPdf = async (e) => {
   if (file) {
     loadingTask.value = PDFJS.getDocument(pdfData)
     loadingTask.value.promise.then((pdf) => {
-      alert( pdf.numPages)
       numPages.value = pdf.numPages
       currentPage.value = 1
       renderPdf(pdf)
