@@ -5,8 +5,8 @@
     </div>
     <div class="renderPdfSpace" ref="renderPdfSpace"></div>
     <div class="prevNextButton">
-      <button class="prevButton" @click="prevPage">Prev</button>
-      <button class="nextButton" @click="nextPage">Next</button>
+      <v-btn class="prevButton" @click="prevPage">button</v-btn>
+      <v-btn class="nextButton" @click="nextPage">Next</v-btn>
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@
 import { onMounted, ref } from 'vue'
 import * as PDFJS from 'pdfjs-dist'
 import * as pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'
+import { VBtn } from 'vuetify/components/VBtn'
 
 PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
