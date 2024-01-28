@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="uploadPdfSpace">
-      <input type="file" accept="application/pdf" @change="uploadPdf">
+      <v-file-input label="File input" accept="application/pdf" @change="uploadPdf"></v-file-input>
     </div>
     <div class="renderPdfSpace" ref="renderPdfSpace"></div>
     <div class="prevNextButton">
