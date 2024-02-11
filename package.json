@@ -19,6 +19,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "pdfjs-dist": "^4.0.379"
+    "pdfjs-dist": "^4.0.379",
+    "sass": "^1.70.0",
+    "vuetify": "^3.4.0-beta.1"
   }
 }
